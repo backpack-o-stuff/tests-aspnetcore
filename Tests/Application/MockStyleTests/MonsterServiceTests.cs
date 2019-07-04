@@ -19,7 +19,7 @@ namespace TH.Tests.Application.MockStyleTests
             {
                 Mocker.GetMock<IMonsterRepository>()
                     .Setup(x => x.Find(It.IsAny<int>()))
-                    .Returns(new Monster { Id = 1, Name = "Rawror", Power = 99 });
+                    .Returns(new Monster { Id = 1, Name = "Rawronidas", Power = 99 });
             });
 
             var result = Act(() => SystemUnderTest.Find(1));
