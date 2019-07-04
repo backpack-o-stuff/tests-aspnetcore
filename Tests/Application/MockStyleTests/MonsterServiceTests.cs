@@ -22,7 +22,7 @@ namespace TH.Tests.Application.MockStyleTests
                     .Returns(new Monster { Id = 1, Name = "Rawronidas", Power = 99 });
             });
 
-            var result = Act(() => SystemUnderTest.Find(1));
+            var result = Act(() => SUT.Find(1));
 
             Assert(() => 
             {
@@ -40,7 +40,7 @@ namespace TH.Tests.Application.MockStyleTests
                     .Returns((Monster) null);
             });
 
-            var result = Act(() => SystemUnderTest.Find(1));
+            var result = Act(() => SUT.Find(1));
 
             Assert(() => 
             {
@@ -53,7 +53,7 @@ namespace TH.Tests.Application.MockStyleTests
         {
             Arrange(() => {});
 
-            var result = Act(() => SystemUnderTest.Find(1));
+            var result = Act(() => SUT.Find(1));
 
             Assert(() => 
             {

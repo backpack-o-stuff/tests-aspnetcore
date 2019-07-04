@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TH.ClientLayer.Infrastructure.IoC
@@ -7,12 +9,30 @@ namespace TH.ClientLayer.Infrastructure.IoC
     {
         private static readonly Assembly[] AutoResolvedAssemblies = new []
         {
-            Assembly.Load("TH.ClientLayer")
+            Assembly.Load("TH.ClientLayer"),
         };
 
         public static void Register(IServiceCollection services)
         {
             RegisterResolvers(services);
+        }
+
+        public static T Resolve<T>()
+        {
+            return Resolve<T>(new List<Action<IServiceCollection>>());
+        }
+
+        public static T Resolve<T>(List<Action<IServiceCollection>> registerResolverOverrides)
+        {
+            return (T) ServiceProvider(registerResolverOverrides).GetService(typeof(T));
+        }
+
+        private static IServiceProvider ServiceProvider(List<Action<IServiceCollection>> registerResolverOverrides)
+        {
+            var services = new ServiceCollection();
+            RegisterResolvers(services);
+            registerResolverOverrides.ForEach(register => register(services));
+            return services.BuildServiceProvider();
         }
 
         private static void RegisterResolvers(IServiceCollection services)

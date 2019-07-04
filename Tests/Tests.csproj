@@ -10,9 +10,15 @@
     <RootNamespace>TH.Tests</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.7.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="Moq" Version="4.12.0" />
     <PackageReference Include="Moq.AutoMock" Version="1.2.0.120" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
@@ -21,10 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClientLayer\ClientLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Application\ComponentStyleTests\" />
   </ItemGroup>
 
 </Project>

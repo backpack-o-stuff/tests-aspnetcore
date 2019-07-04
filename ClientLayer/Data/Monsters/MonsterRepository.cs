@@ -10,6 +10,7 @@ namespace TH.ClientLayer.Data.Monsters
         List<Monster> All();
         Monster Add(Monster monster);
         void Remove(int id);
+        void RemoveRange(List<Monster> monsters);
     }
 
     public class MonsterRepository : IMonsterRepository
@@ -53,6 +54,15 @@ namespace TH.ClientLayer.Data.Monsters
             {
                 var monster = context.Monsters.FirstOrDefault(x => x.Id == id);
                 context.Monsters.Remove(monster);       
+                context.SaveChanges();
+            }
+        }
+
+        public void RemoveRange(List<Monster> monsters)
+        {
+            using(var context = _dbContextFactory.For())
+            {
+                context.Monsters.RemoveRange(monsters);       
                 context.SaveChanges();
             }
         }

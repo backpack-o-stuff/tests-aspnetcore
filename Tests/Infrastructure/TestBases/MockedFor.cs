@@ -7,21 +7,18 @@ namespace TH.Tests.Infrastructure.TestBases
         where T : class
     {
         protected AutoMocker Mocker;
-        protected T SystemUnderTest;
+        protected T SUT;
 
         public MockedFor()
         {
             Mocker = new AutoMocker(MockBehavior.Loose, DefaultValue.Empty);
 
-            BeforeEachSharedSetup();
-            BeforeEach();
+            SharedBeforeAll();
 
-            SystemUnderTest = Mocker.CreateInstance<T>();
+            SUT = Mocker.CreateInstance<T>();
         }
 
-        protected virtual void BeforeEach() {}
-
-        private void BeforeEachSharedSetup()
+        private void SharedBeforeAll()
         {
             // NOTE: for any setup that is shared among all tests
         }
