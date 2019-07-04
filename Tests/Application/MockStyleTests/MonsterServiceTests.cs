@@ -10,7 +10,7 @@ namespace TH.Tests.Application.MockStyleTests
 {
     [TestClass]
     public class MonsterServiceTests
-        : TestMockedFor<MonsterService>
+        : MockedFor<MonsterService>
     {
         [TestMethod]
         public void Find_When_AllIsWell()
@@ -24,7 +24,10 @@ namespace TH.Tests.Application.MockStyleTests
 
             var result = Act(() => SystemUnderTest.Find(1));
 
-            result.Id.Should().Be(1, "id was invliad.");
+            Assert(() => 
+            {
+                result.Id.Should().Be(1, "id was invliad.");
+            });
         }
 
         [TestMethod]
@@ -39,7 +42,10 @@ namespace TH.Tests.Application.MockStyleTests
 
             var result = Act(() => SystemUnderTest.Find(1));
 
-            result.Should().BeNull("result was found");
+            Assert(() => 
+            {
+                result.Should().BeNull("result was found");
+            });
         }
 
         [TestMethod]
@@ -49,7 +55,10 @@ namespace TH.Tests.Application.MockStyleTests
 
             var result = Act(() => SystemUnderTest.Find(1));
 
-            result.Should().BeNull("mocked should have default returned empty/null/default.");
+            Assert(() => 
+            {
+                result.Should().BeNull("mocked should have default returned empty/null/default.");
+            });
         }
     }
 }

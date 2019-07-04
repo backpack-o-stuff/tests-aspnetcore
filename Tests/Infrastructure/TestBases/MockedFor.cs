@@ -3,13 +3,13 @@ using Moq.AutoMock;
 
 namespace TH.Tests.Infrastructure.TestBases
 {
-    public class TestMockedFor<T> : TestArrangeActOn
+    public class MockedFor<T> : ArrangeActAssertOn
         where T : class
     {
         protected AutoMocker Mocker;
         protected T SystemUnderTest;
 
-        public TestMockedFor()
+        public MockedFor()
         {
             Mocker = new AutoMocker(MockBehavior.Loose, DefaultValue.Empty);
 

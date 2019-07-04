@@ -2,7 +2,7 @@
 
 namespace TH.Tests.Infrastructure.TestBases
 {
-    public class TestArrangeActOn
+    public class ArrangeActAssertOn
     {
         protected void Arrange(Action arrange)
         {
@@ -17,6 +17,11 @@ namespace TH.Tests.Infrastructure.TestBases
         protected TResult Act<TResult>(Func<TResult> act)
         {
             return act();
+        }
+
+        protected void Assert(Action assert)
+        {
+            assert();
         }
     }
 }
