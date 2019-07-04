@@ -10,8 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TH.ClientLayer.Infrastructure.IoC;
 
-namespace ClientLayer
+namespace TH.ClientLayer
 {
     public class Startup
     {
@@ -26,6 +27,7 @@ namespace ClientLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            DependencyRegistrations.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
