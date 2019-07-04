@@ -11,13 +11,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="Moq.AutoMock" Version="1.2.0.120" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <ProjectReference Include="..\ClientLayer\ClientLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\ComponentStyleTests\" />
   </ItemGroup>
 
 </Project>

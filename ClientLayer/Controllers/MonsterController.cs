@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using TH.ClientLayer.Data.Monsters;
+using TH.ClientLayer.Application.Monsters;
 using TH.ClientLayer.Models;
 
 namespace TH.ClientLayer.Controllers
@@ -9,38 +9,38 @@ namespace TH.ClientLayer.Controllers
     [ApiController]
     public class MonsterController : Controller
     {
-        private readonly IMonsterRepository _monsterRepository;
+        private readonly IMonsterService _monsterService;
 
-        public MonsterController(IMonsterRepository monsterRepository)
+        public MonsterController(IMonsterService monsterService)
         {
-            _monsterRepository = monsterRepository;
+            _monsterService = monsterService;
         }
 
         [HttpGet]
         public JsonResult Monsters()
         {
-            var models = _monsterRepository.All();
+            var models = _monsterService.All();
             return Result(HttpStatusCode.OK, models);
         }
         
         [HttpGet("{id}")]
         public JsonResult Monster(int id)
         {
-            var model = _monsterRepository.Find(id);
+            var model = _monsterService.Find(id);
             return Result(HttpStatusCode.OK, model);
         }
         
         [HttpPost]
         public JsonResult AddMonster([FromBody] Monster monster)
         {
-            var model = _monsterRepository.Add(monster);
+            var model = _monsterService.Add(monster);
             return Result(HttpStatusCode.OK, model);
         }
                 
         [HttpDelete("{id}")]
         public JsonResult RemoveMonster(int id)
         {
-            _monsterRepository.Remove(id);
+            _monsterService.Remove(id);
             return Result(HttpStatusCode.OK);
         }
 
