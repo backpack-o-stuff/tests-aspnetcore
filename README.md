@@ -33,3 +33,62 @@ The trade-off with these tests is that the SUT is tested in a vacuum. While you 
 This test helper uses the dependency resolver to create a more realistic instance of the SUT (SystemUnderTest), with the caveat that you can override the resolvers registrations with fakes that you create. This will allow you to fake out external reaching dependencies so that those fakes will be pass in and treated as the actual dependency. All non-faked dependencies will be the real dependencies of the SUT.
 
 The trade-off with these tests is that the tests are more flexible to system code changes but depending on how deeply the code flows through the SUTs dependencies could mean a more extensive setup in the tests themselves (arrange of a test). Additionally, changes to dependencies of component tested objects can find their tests breaking. I see this as both a boon and a curse, as it tells me when changes affect the system in large but also create more failing tests than one needs actually to deal with. Small changesets in between test runs help narrow down required troubleshooting, but sometimes it can't be helped. However, I have found that the flexibility to change a system more freely (causing fewer test changes) has shifted my opinion towards the want to use classical over mocked tests.
+
+## MockedFor<T> Example
+
+```
+[TestClass]
+public class MonsterServiceTests
+    : MockedFor<MonsterService>
+{
+    [TestMethod]
+    public void Find_When_AllIsWell()
+    {
+        Arrange(() =>
+        {
+            Mocker.GetMock<IMonsterRepository>()
+                .Setup(x => x.Find(It.IsAny<int>()))
+                .Returns(new Monster { Id = 1, Name = "Rawronidas", Power = 99 });
+        });
+
+        var result = Act(() => SUT.Find(1));
+
+        Assert(() => 
+        {
+            result.Id.Should().Be(1, "id was invliad.");
+        });
+    }
+}
+```
+
+## IntegratedFor<T> Example
+```
+[TestClass]
+public class MonsterServiceTests
+    : IntegratedFor<MonsterService>
+{
+    [TestCleanup]
+    public void AfterEach()
+    {
+        var repository = Resolve<IMonsterRepository>();
+        repository.RemoveRange(repository.All());
+    }
+
+    [TestMethod]
+    public void Find_When_AllIsWell()
+    {
+        Arrange(() =>
+        {
+            var repository = Resolve<IMonsterRepository>();
+            repository.Add(new Monster { Name = "Rawrgnar", Power = 99 });
+        });
+
+        var result = Act(() => SUT.Find(1));
+
+        Assert(() => 
+        {
+            result.Id.Should().Be(1, "id was invliad.");
+        });
+    }
+}
+```
