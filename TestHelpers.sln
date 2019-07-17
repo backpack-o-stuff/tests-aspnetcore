@@ -8,11 +8,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepositoryFiles", "RepositoryFiles", "{1FB12588-8DBE-42C5-BB64-54ECBC071F5E}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		CONTRIBUTING.md = CONTRIBUTING.md
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{0F74FDB9-430F-4CCC-BAB9-9FF1587896EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{0F74FDB9-430F-4CCC-BAB9-9FF1587896EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
