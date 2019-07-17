@@ -1,4 +1,4 @@
-# tests-aspnetcore
+# tests-dotnetcore
 
 Test practices and helpers in ASP.NET Core.
 
